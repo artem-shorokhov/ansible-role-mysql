@@ -1,0 +1,47 @@
+---
+
+- name: install mysql rpm
+  yum:
+    name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+    state: present
+
+- name: install mysql packages
+  yum:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+  with_items:
+    - mysql-server
+    - MySQL-python
+
+- name: copy the my.cnf configuration file
+  template:
+    src: my.cnf.j2
+    dest: /etc/my.cnf
+  notify:
+    - restart mysql
+
+- name: start mysql daemon
+  service:
+    name: mysqld
+    state: started
+    enabled: yes
+
+- include_tasks: mysql_secure_installation.yml
+
+- name: create databases
+  mysql_db:
+    name: "{{ item.name }}"
+    state: present
+  with_items: "{{ mysql_db }}"
+  when: mysql_db|lower() != 'none'
+
+- name: create database users
+  mysql_user:
+    name: "{{ item.name }}"
+    password: "{{ item.pass | default(item.name) }}"
+    priv: "{{ item.priv | default('*.*:ALL') }}"
+    state: present
+    host: "{{ item.host | default('localhost') }}"
+  with_items: "{{ mysql_users }}"
+  when: mysql_users|lower() != 'none'

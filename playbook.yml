@@ -1,0 +1,7 @@
+---
+- name: Set up MySQL server.
+  hosts: all
+  become: yes
+  
+  roles:
+  - mysql

@@ -1,0 +1,9 @@
+---
+
+mysql_db:
+  - name: db
+
+mysql_users:
+  - name: user
+    pass: user
+    priv: "*.*:ALL"
