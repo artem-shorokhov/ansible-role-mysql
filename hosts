@@ -1,3 +1,3 @@
 # Group of a lonely server.
 [servers]
-target
+localhost ansible_connection=local
