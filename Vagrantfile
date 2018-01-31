@@ -12,11 +12,12 @@ Vagrant.configure("2") do |config|
     host.vm.hostname = HOST[:hostname]
     host.vm.network "private_network", ip: HOST[:ip]
     
+    config.vm.provision "ansible_local" do |ansible|
+      ansible.provisioning_path = "/vagrant"
+      ansible.inventory_path = "hosts"
+      ansible.playbook = "playbook.yml"
+    end
+    
   end
-  config.vm.provision "ansible_local" do |ansible|
-    ansible.provisioning_path = "/vagrant"
-    ansible.inventory_path = "hosts"
-    ansible.playbook = "playbook.yml"
-    ansible.limit = "all"
-  end
+
 end
