@@ -27,7 +27,7 @@ suites:
   - name: mysql
     verifier:
       inspec_tests:
-#        - test/smoke
+        - test
         - https://github.com/artem-shorokhov/inspec-workshop.git
 
 # Workaround to avoid 'SCP upload failed (open failed (1))'.
