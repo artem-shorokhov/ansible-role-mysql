@@ -1,6 +1,6 @@
 ---
 
-- name: install mysql rpm
+- name: set mysql yum repo
   yum:
     name: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
     state: present
