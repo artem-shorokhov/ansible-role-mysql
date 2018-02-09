@@ -20,4 +20,4 @@
 ### Vagrant
 
 - `vagrant up` - create virtual machine and provision it with Ansible playbook
-- `vagrant ssh` - login into Ansible server
+- `vagrant ssh` - login into virtual machine
