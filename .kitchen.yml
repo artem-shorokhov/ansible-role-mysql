@@ -8,7 +8,7 @@ provisioner:
   ansible_sudo: true
 #  ansible_verbose: true
 #  ansible_verbosity: 2
-  playbook: mysql.yml
+  playbook: playbook.yml
   roles_path: ./roles/
 
 verifier: 
@@ -28,7 +28,7 @@ suites:
     verifier:
       inspec_tests:
         - test
-        - https://github.com/artem-shorokhov/inspec-workshop.git
+#        - https://github.com/artem-shorokhov/inspec-workshop.git
 
 # Workaround to avoid 'SCP upload failed (open failed (1))'.
 transport:
